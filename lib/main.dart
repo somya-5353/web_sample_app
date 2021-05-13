@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:web_sample_app/account_summary_widget.dart';
 import 'package:web_sample_app/cc_colors.dart';
 
@@ -12,6 +13,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      builder: (context, child) => ResponsiveWrapper.builder(
+        child,
+        maxWidth: MediaQuery.of(context).size.width,
+        minWidth: 1200,
+        defaultScale: true,
+        breakpoints: [
+          // ResponsiveBreakpoint.resize(480, name: MOBILE),
+          // ResponsiveBreakpoint.autoScale(800, name: TABLET),
+          ResponsiveBreakpoint.autoScale(1200, name: DESKTOP),
+          // ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+        ],
+      ),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -23,6 +36,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
     return Scaffold(
       backgroundColor: CCColors.fednetBackground,
       appBar: AppBar(
